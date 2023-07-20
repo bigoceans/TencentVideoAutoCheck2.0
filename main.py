@@ -134,13 +134,9 @@ def config():
 
     # 从secrets中获取用户的cookie
     user_1_cookie = os.environ.get("USER_1_COOKIE", "")
-    user_2_cookie = os.environ.get("USER_2_COOKIE", "")
-    user_3_cookie = os.environ.get("USER_3_COOKIE", "")
 
     # 更新用户的cookie信息
     account["users"][0]["vqq_access_token"] = user_1_cookie
-    account["users"][1]["vqq_access_token"] = user_2_cookie
-    account["users"][2]["vqq_access_token"] = user_3_cookie
 
     return account
 
