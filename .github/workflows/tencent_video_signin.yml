@@ -1,0 +1,45 @@
+name: Tencent Video Sign-In
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天UTC时间 00:00 执行一次
+
+jobs:
+  sign_in_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Tencent Video Sign-In
+        env:
+          USER_1_COOKIE: ${{ secrets.USER_1_COOKIE }}
+          USER_2_COOKIE: ${{ secrets.USER_2_COOKIE }}
+          USER_3_COOKIE: ${{ secrets.USER_3_COOKIE }}
+          WE_COM_PUSH: ${{ secrets.WE_COM_PUSH }}
+          DING_PUSH: ${{ secrets.DING_PUSH }}
+          PUSHPLUS_PUSH: ${{ secrets.PUSHPLUS_PUSH }}
+        run: python main.py
+      - name: Append Success Log #追加成功日志
+        run: |
+          echo "$(date +%Y-%m-%d\ %H:%M:%S) - 签到成功" >> run.log
+      - name: Upload log #上传日志
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: run.log
+      - name: Push log #更新日志
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: auto-checkin
+          branch: main
