@@ -20,7 +20,7 @@ def config():
 
 def WeCom(content):
     wx = config()["push"]["WeCom"]
-    if not eval(wx["push"]):
+    if not eval(os.environ.get("WE_COM_PUSH", wx["push"])):
         print('企业微信不推送')
     else:
         # 获取企业微信推送所需的配置信息
@@ -37,7 +37,7 @@ def WeCom(content):
 
 def Ding(content):
     ding = config()["push"]["Ding"]
-    if not eval(ding["push"]):
+    if not eval(os.environ.get("DING_PUSH", ding["push"])):
         print('钉钉不推送')
     else:
         # 获取钉钉推送所需的配置信息
@@ -51,9 +51,10 @@ def Ding(content):
             # 推送逻辑...
             # 这里根据access_token等信息执行钉钉推送
 
+
 def pushplus(content):
     pushplus = config()["push"]["pushplus"]
-    if not eval(pushplus["push"]):
+    if not eval(os.environ.get("PUSHPLUS_PUSH", pushplus["push"])):
         print('pushplus不推送')
     else:
         # 获取pushplus推送所需的配置信息
@@ -74,6 +75,7 @@ def pushplus(content):
                 print('推送失败')
 
 def main(content):
+    print(content)
     WeCom(content)
     Ding(content)
     pushplus(content)
