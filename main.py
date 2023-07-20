@@ -6,36 +6,6 @@ import push
 import os
 
 
-def config():
-    path = os.getcwd()
-    if path == '/opt/function':
-        path = 'code/'
-    else:
-        path = ''
-    with open(path + 'config.json', encoding='utf-8') as f:
-        account = f.read()
-    a=account.count('/*')
-    for i in range(a):
-        x=account.find('/*')
-        y=account.find('*/')+2
-        account=account[:x]+account[y:]
-    account=re.sub(' ', '', account)
-    account = re.sub('\n', '', account)
-    account=json.loads(account)
-
-    # 从secrets中获取用户的cookie
-    user_1_cookie = os.environ.get("USER_1_COOKIE", "")
-    user_2_cookie = os.environ.get("USER_2_COOKIE", "")
-    user_3_cookie = os.environ.get("USER_3_COOKIE", "")
-
-    # 更新用户的cookie信息
-    account["users"][0]["vqq_access_token"] = user_1_cookie
-    account["users"][1]["vqq_access_token"] = user_2_cookie
-    account["users"][2]["vqq_access_token"] = user_3_cookie
-
-    return account
-
-
 def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
     #cookie='vdevice_qimei36='+qimei36+';vqq_appid='+appid+';vqq_openid='+openid+';vqq_access_token='+access_token+';main_login='+login
     cookie = 'vdevice_qimei36='+qimei36+';vqq_appid=' + appid + ';vqq_openid=' + openid + ';vqq_access_token=' + access_token + ';main_login=' + login + ';vqq_vuserid=' + vuserid + ';ip=' + ip
@@ -158,7 +128,20 @@ def config():
         x=account.find('/*')
         y=account.find('*/')+2
         account=account[:x]+account[y:]
+    account=re.sub(' ', '', account)
+    account = re.sub('\n', '', account)
     account=json.loads(account)
+
+    # 从secrets中获取用户的cookie
+    user_1_cookie = os.environ.get("USER_1_COOKIE", "")
+    user_2_cookie = os.environ.get("USER_2_COOKIE", "")
+    user_3_cookie = os.environ.get("USER_3_COOKIE", "")
+
+    # 更新用户的cookie信息
+    account["users"][0]["vqq_access_token"] = user_1_cookie
+    account["users"][1]["vqq_access_token"] = user_2_cookie
+    account["users"][2]["vqq_access_token"] = user_3_cookie
+
     return account
 
 def main():
