@@ -12,27 +12,27 @@
     "push": {
         "WeCom": {
             /* 是否企业微信推送 */
-            "push": "False",
+            "push": true,
             /* 企业ID */
-            "corpid": "",
+            "corpid": "ww0fc74e",
             /* 应用的凭证密钥 */
-            "secret": "",
+            "secret": "j-F4DeIhMtbbB3twqxwU",
             /* 应用id */
-            "agentid": ""
+            "agentid": "1000006"
         },
         "Ding": {
             /* 是否钉钉推送 */
-            "push": "False",
+            "push": false,
             /* 应用凭证 */
             "appkey": "",
             /* 应用凭证 */
             "appsecret": "",
             /* 钉钉app-部门群-设置-机器人-webhook */
-            "webhook": ""
+            "webhook": "https://oapi.dingtalk.com/robot/send?access_token="
         },
         "pushplus": {
             /* 是否pushplus推送 */
-            "push": "False",
+            "push": false,
             /* pushplus  token */
             "token": ""
         }
